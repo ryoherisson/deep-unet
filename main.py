@@ -21,8 +21,7 @@ from utils.vis_img import VisImage
 from data_process.data_path_process import make_datapath_list
 from data_process.dataset import DataTransform, VOCDataset
 from modeling.semseg import SemanticSegmentation
-from modeling.pspnet.pspnet import PSPNet
-from modeling.criterion.psploss import PSPLoss
+from modeling.deep_unet.deep_unet import DeepUNet
 from modeling.metrics.metrics import Metrics
 
 logger = getLogger(__name__)
@@ -78,9 +77,13 @@ def main(args):
     ### Network ###
     logger.info('preparing network...')
 
-    network = PSPNet(n_classes=configs['n_classes'], img_size=configs['img_size'], img_size_8=configs['input_size_8'])
+    network = DeepUNet(n_channels=configs['n_channels'], n_classes=configs['n_classes'])
     network = network.to(device)
-    criterion = PSPLoss(aux_weight=configs['aux_weight'])
+    if network.n_classes > 1:
+        criterion = nn.CrossEntropyLoss()
+    else:
+        criterion = nn.BCEWithLogitsLoss()
+    criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(network.parameters(), lr=configs['lr'], weight_decay=configs['decay'])
 
     if configs['resume']:

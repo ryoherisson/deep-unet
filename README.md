@@ -1,8 +1,5 @@
-# PSPNet: Pyramid Scene Parsing Network in pytorch
-This is a pytorch implementation of Pyramid Scene Parsing Network in pytorch.  
-
-(Reference)  
-https://github.com/YutaroOgawa/pytorch_advanced/tree/master/3_semantic_segmentation
+# Deep U-Net in pytorch
+This is a pytorch implementation of Deep U-Net.  
 
 ## Requirements
 ```bash
@@ -41,7 +38,6 @@ n_gpus: 2 # currently works with only one gpu
 batch_size: 64
 n_epochs: 50
 input_size_8: 60
-aux_weight: 0.4
 
 # save_ckpt_interval should not be 0.
 save_ckpt_interval: 50

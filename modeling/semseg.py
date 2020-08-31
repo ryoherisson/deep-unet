@@ -45,9 +45,9 @@ class SemanticSegmentation(object):
                     targets = targets.to(self.device)
 
                     # outputs = self.network(inputs)
-                    outputs, output_auxs  = self.network(inputs)
+                    outputs = self.network(inputs)
 
-                    loss = self.criterion((outputs, output_auxs), targets.long())
+                    loss = self.criterion(outputs, targets.long())
 
                     loss.backward()
 
@@ -102,9 +102,9 @@ class SemanticSegmentation(object):
                     targets = targets.to(self.device)
 
                     # outputs = self.network(inputs)
-                    outputs, output_auxs  = self.network(inputs)
+                    outputs = self.network(inputs)
 
-                    loss = self.criterion((outputs, output_auxs), targets.long())
+                    loss = self.criterion(outputs, targets.long())
 
                     self.optimizer.zero_grad()
 
